@@ -1,3 +1,17 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
 .navbar{
     height:5rem;
     background-color: white;
@@ -53,4 +67,33 @@
     justify-content: center;
     align-items: space-evenly;
     text-align: center;
+}
+
+.card{
+    border: none !important;
+    margin-bottom:2 rem;
+}
+
+.card-img-top{
+     border-radius:2 rem !important;
+     width: 100%;
+     object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-text p{
+    font-weight: 400 ;
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+opacity: 0.2;
+background-color: white;
+}
+
+.show-img{
+    height: 40vh;
 }
