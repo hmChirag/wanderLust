@@ -5,9 +5,14 @@ const listings = require("./models/listing.js")
 const path=require("path");
 const { encode } = require("punycode");
 const methodOverride=require("method-override");
-const listing = require("./models/listing.js");
 const ejsMate=require("ejs-mate");
 const Mongo_URL="mongodb://127.0.0.1:27017/makeMyTrip";
+const wrapAsync =require("./utils/wrapAsycn.js");
+const ExpressError =require("./utils/ExpressError.js");
+const { nextTick } = require("process");
+const Review = require("./models/review.js");
+const listing = require("./models/listing.js");
+
 
 
 main()
@@ -89,6 +94,17 @@ app.delete("/listings/:id",async (req,res)=>{
     console.log(deletedListeing);
     res.redirect("/listings");
 });
+app.all("*",(req,res,next)=>{
+    next(new ExpressError(404,"404 error ! Page not found!"))
+})
+
+app.use((err,req,res,next)=>{
+    let {statusCode,message}=err;
+    res.render("errors.ejs",{message});
+});
+
+
+
 
 // app.get("/testlisting",async (req,res)=>{
 //     let sampleListing = new listing({
