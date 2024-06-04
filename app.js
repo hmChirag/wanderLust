@@ -103,7 +103,19 @@ app.use((err,req,res,next)=>{
     res.render("errors.ejs",{message});
 });
 
+//reviews  
+//post route
+app.post("/listings/:id/reviews",async(req,res)=>{
+    let listing = await listings.findById(req.params.id);
+    let newReview = new Review(req.body.Review);
 
+    listing.Review.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+    res.send("new review saved");
+    res.redirect(`/listings/${listing.id}`);  
+});
 
 
 // app.get("/testlisting",async (req,res)=>{
